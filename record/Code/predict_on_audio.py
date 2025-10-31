@@ -142,7 +142,7 @@ if __name__ == "__main__":
     while True:
         if count > 9:
             count = 0
-            p = Process(target=upload_to_s3, args=("/opt/bird-files/record/data/"))
+            p = Process(target=upload_to_s3, args=("/opt/bird-files/record/data/",))
             p.start()
         
         files = os.listdir(target_dir)
