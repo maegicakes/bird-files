@@ -124,8 +124,10 @@ def run(audio_path):
     else:
         print(f"No detections for {audio_path}")
 
-def upload():
-    subprocess.run(["bash", "/opt/bird-files/record/upload.sh"])
+# def upload():
+#     subprocess.run(["bash", "/opt/bird-files/record/upload.sh"])
+def upload_to_s3(target_dir):
+    subprocess.run(["python", "/opt/bird-files/record/upload_to_s3.py", "--dir", target_dir, "--delete"], check=False)
 
 def move_file(filename):
     filename_new = filename.replace("_temp", "").replace("Segments/", "").replace("wav", "flac")
@@ -140,7 +142,7 @@ if __name__ == "__main__":
     while True:
         if count > 9:
             count = 0
-            p = Process(target=upload, args=())
+            p = Process(target=upload_to_s3, args=("/opt/bird-files/record/data/"))
             p.start()
         
         files = os.listdir(target_dir)
