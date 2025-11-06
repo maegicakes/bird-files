@@ -138,11 +138,11 @@ if __name__ == "__main__":
     target_dir = "/opt/bird-files/record/data_temp/Audios"
     result_dir = "/opt/bird-files/record/data_temp/Segments/"
 
-    count = 10
+    count = 2
     while True:
-        if count > 9:
+        if count > 1:
             count = 0
-            p = Process(target=upload_to_s3, args=("/opt/bird-files/record/data_temp/Segments/",))
+            p = Process(target=upload_to_s3, args=("/opt/bird-files/record/data/",))
             p.start()
         
         files = os.listdir(target_dir)
